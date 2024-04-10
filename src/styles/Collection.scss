@@ -1,132 +1,122 @@
 .collection-page {
-    margin: 0 auto;
     overflow-y: scroll;
-    height: 100vh;
-    width: 60%;
-    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 30px;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    color: white;
     background-color: black;
     font-family: var(--main-font);
-
-    
-
-    
-
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    .modal-for-noUser {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 60%;
+        width: 60%;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: var(--nav-bg-color);
+        h1 {
+            margin-bottom: 0px;
+        }
+        ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            height: 30%;
+            width: 70%;
+            margin: 0 auto;
+            list-style: none;
+            > li {
+                text-align: center;
+                text-decoration: none;
+                margin-bottom: 10px;
+                color: white;
+            }
+        }
+        a {
+            width: 40%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            background-color: var(--green-color);
+        }
+    }
     &::-webkit-scrollbar {
         display: none;
     }
-    
     /* Hide scrollbar for IE, Edge and Firefox */
-
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    
-
-
-
-    .user-bookmarks {
-        position: relative;
-        margin: 0 auto;
-        margin-top: 30px;
-        min-height: 200px;
-        height: auto;
-        width: 80%;
-
-        .bm-header {
-            font-size: 35px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
-            color: white;
-            background-color: black;
-        }
+    .bm-header {
+        font-size: 35px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+        color: white;
+        background-color: black;
     }
-}
-
-
-.card-container {
-    margin: 0 auto;
-    display: flex;
-    height: 200px;
-    width: 95%;
-    margin-top: 30px;
-    padding: 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    color: white;
-    background-color: var(--nav-bg-color);
-
-
-    & > img {
-        border-radius: 5px;
-        height: auto;
-        width: 120px;
-    }
-
-    .card-details {
-        position: relative;
-        padding: 0px 10px 10px 10px;
-
-        & > h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        & > p { 
-            line-height: 20px;
-            font-size: 13px;
-            color: rgb(192, 189, 189);
-        }
-
-        .sub-footer {
-            position: absolute;
-            bottom: 10px;
-            width: 70%;
-            font-size: 13px;
-            color: white;
-
-            & > span {
-                margin-right: 10px;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 990px) {
-    .collection-page {
-        overflow-x: hidden;
-        width: 100%;
-    }
-
-
- 
-}
-
-@media screen and (max-width: 665px) {
     .card-container {
-        height: fit-content;
-        width: 90%;
-        flex-direction: column;
-        align-items: center;
-
-        & > img {
-            width: 100%;
+        display: flex;
+        margin: 0 auto;
+        // height: 280px;
+         width: 90%;
+        aspect-ratio: 1 / 1;
+        margin-top: 30px;
+        text-decoration: none;
+        color: white;
+        //background-color: var(--nav-bg-color);
+        > img {
+            width: 30%;
         }
+        .card-details {
+            position: relative;
+            padding: 0px 10px 10px 20px;
+            > h2 {
+                font-size: 20px;
+                margin-bottom: 10px;
+                display: -webkit-box;
 
-        .card-details  {
-            & > h2 {
-                margin-top: 10px;
-                text-align: center;
+                -webkit-line-clamp: 2; /* Number of lines to display */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
-            & > p {
-                display: none;
-            }
+            .synopsis { 
+                max-height: 70%;
+                width: 100%;
 
+
+                display: -webkit-box;
+                -webkit-line-clamp: 3; /* Number of lines to display */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+
+                line-height: 20px;
+                font-size: 13px;
+                color: rgb(192, 189, 189);
+                //background-color: blue;
+            }
             .sub-footer {
-                display: none;
+                position: absolute;
+                bottom: 10px;
+                width: 70%;
+                font-size: 13px;
+                color: white;
+                > span {
+                    margin-right: 10px;
+                }
             }
         }
     }
-
-    
-
-
 }

@@ -51,7 +51,6 @@ export default function Post (props) {
 
     const removeLike = async () => {
         try {
-            console.log("deleting...")
             const likeToDeleteQuery = query(LikesReference, 
                 where("postId", "==", post.id), 
                 where("userId", "==", user?.uid)
@@ -87,18 +86,11 @@ export default function Post (props) {
             </div>
             <h1>{post.title}</h1>
             <p>{post.description}</p>
-
-
             <button onClick={hasLikedPost ? removeLike : addLike} className="likes">
                 {!hasLikedPost && <AiOutlineHeart className="no-like"/>}
                 {hasLikedPost && <AiFillHeart className="yes-like"/>}
                 {likeAmount && likeAmount?.length}
             </button>
-            {/* <button onClick={addLike} className="likes">
-                {!hasLikedPost && <AiOutlineHeart className="no-like"/>}
-                {hadLikedPost && <AiFillHeart className="yes-like"/>}
-                {likeAmount && likeAmount?.length}
-            </button> */}
         </article>
     )
 }

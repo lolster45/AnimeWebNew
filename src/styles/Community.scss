@@ -1,32 +1,25 @@
 .community-page {
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    width: 60%;
+    max-height: 100vh;
+    width: 100%;
+    padding-bottom: 90px;
     font-family: var(--main-font);
     color: white;
     background-color: black;
-    
-    overflow-y: scroll;
     &::-webkit-scrollbar {
         display: none;
     }
-      
     /* Hide scrollbar for IE, Edge and Firefox */
-    
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    
-
-    
-
     .user-posts-container {
         font-family: var(--main-font);
         min-height: 300px;
         height: auto;
         width: 600px;
-
         .user-post {
             position: relative;
             padding: 10px;
@@ -34,29 +27,24 @@
             margin-bottom: 10px;
             padding-bottom: 50px;
             background-color: var(--nav-bg-color);
-
-            & > div {
+            > div {
                 display: flex;
                 align-items: center;
                 margin-bottom: 10px;
-
-                & > img {
+                > img {
                     border-radius: 50%;
                     width: 25px;
                     margin-right: 10px;
                 }
             }
-
-            & > h1 {
+            > h1 {
                 font-size: 20px;
                 margin-bottom: 10px;
             }
-
-            & > p {
+            > p {
                 color: rgb(197, 196, 196);
                 font-size: 13px;
             }
-
             .likes {
                 cursor: pointer;
                 position: absolute;
@@ -66,32 +54,27 @@
                 bottom: 8px;
                 color: white;
                 border: none;
-                background-color: var(--nav-bg-color);
-                
-                & > .no-like {
+                background-color: var(--nav-bg-color);  
+                .no-like {
                     color: white;
                     font-size: 18px;
                     margin-right: 3px;
                 }
-                & > .yes-like {
+                .yes-like {
                     fill: red;
                     font-size: 18px;
                     margin-right: 3px;
                 }
-
             }
         }
     }
 }
-
-
 @media screen and (max-width: 990px) {
     .community-page {
+        padding-top: 90px;
         width: 100%;
-
         .user-posts-container {
-            width: 80%;
-            
+            width: 80%;  
         }
     }
 }

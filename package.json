@@ -17,12 +17,12 @@
     "react-firebase-hooks": "^5.1.1",
     "react-hook-form": "^7.42.1",
     "react-icons": "^4.7.1",
+    "react-lazy-load-image-component": "^1.6.0",
+    "react-lazyload": "^3.2.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.2",
-    "react-scroll": "^1.8.9",
     "react-slick": "^0.29.0",
     "sass": "^1.57.1",
-    "slick-carousel": "^1.8.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

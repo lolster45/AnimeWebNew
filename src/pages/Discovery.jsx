@@ -1,21 +1,15 @@
-//Components...
-import MobileNav from "./Mobile-nav"
 
-//React router...
+//React...
 import { Outlet, Link } from "react-router-dom"
-
-//React redux...
-import { useDispatch } from "react-redux"
-//import {nameInput} from "../store"
 
 //Styles...
 import "../styles/Discovery.scss"
+import { useState } from "react"
 
 
 export default function Discovery () {
 
-    //const dispatch = useDispatch()  
-
+    //Handles page navigation using local storage...
     const handleAnimeClick = (e) => {
         localStorage.setItem("currentAnimePage", "1")
         //dispatch(nameInput({type: e.currentTarget.getAttribute("data-name")}))
@@ -25,9 +19,10 @@ export default function Discovery () {
         //dispatch(nameInput({type: e.currentTarget.getAttribute("data-name")}))
     }
 
+
+    
     return (
         <section className="discovery-page">
-            <MobileNav/>
             <nav className="discovery-nav">
                 <Link onClick={handleAnimeClick} to="anime">Anime</Link>
                 <Link onClick={handleMangaClick} to="manga">Manga</Link>
@@ -35,6 +30,7 @@ export default function Discovery () {
                 <Link to="manhua">Manhua</Link>
             </nav>
             <Outlet/>
+            <footer>@ 2022 AnimeFun - A project build with ReactJS</footer>
         </section>
     )
 }

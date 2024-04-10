@@ -1,78 +1,106 @@
-//Components...
+//React...
 import { useState, useEffect } from "react"
 import {Link, useNavigate} from "react-router-dom"
-import {useAuthState} from "react-firebase-hooks/auth"
+
+//Components...
+import RightNavShean from "./loading-shean/RightNavShean"
+import TrendingCard from "./TrendingTemplateFolder/TrendingCard"
+
+//Firebase...
 import {auth} from "../config/firebase"
-import CardTemplate from "./cardTemplate"
+import {useAuthState} from "react-firebase-hooks/auth"
+
+//React redux toolkit...
+import { useDispatch } from "react-redux"
+import {searchType} from "../store"
+
+//Images/icons...
+import {IoNotificationsOutline} from "react-icons/io5"
+import { IoPersonCircleOutline } from "react-icons/io5";
+
 
 //Styles... 
 import "../styles/SideMenu.scss"
 
-//Images/icons...
-import {IoNotificationsOutline} from "react-icons/io5"
-import DefaultAvatar from "../images/default-avatar.jpg"
-import { useDispatch } from "react-redux"
-import {nameInput, searchType} from "../store"
-
 export default function AddMenu () {
-    const [user] = useAuthState(auth)
-    const [topAnime, setTopAnime] = useState([])
-    const [loading, setLoading] = useState(false)
+    //Firebase...
+    const [user] = useAuthState(auth);
+
+    //State that holds top anime data/search input of user...
+    const [topAnime, setTopAnime] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    //React router...
+    const navigate = useNavigate();
+    
+    //React toolkit...
+    const dispatch = useDispatch();
+    
+    //Determines loading shean animation...
+    const [loading, setLoading] = useState(true);
+
+    async function getTopAnime() {
+        try {
+            const apiFetch = await fetch(`https://api.jikan.moe/v4/top/anime?limit=4&page=1&filter=airing`)
+            const data = await apiFetch.json();
+            setTopAnime(data.data)
+            setLoading(false)
+            return;
+        } 
+        catch (error) {
+            console.log("ERROR RETRIEVING SIDE NAV CONTENT...", error)
+        }
+        return;
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        dispatch(searchType({type: searchQuery}))
+        setSearchQuery("")
+        navigate("/search")
+    }
 
     useEffect(() => {
-        const timeOut = setTimeout(getTopAnime, 8000)
+        //Im using setTimeout to not trigger rate limit on the API i am using...
+        const timeOut = setTimeout(getTopAnime, 3000)
         return function ()  {
             clearTimeout(timeOut)
         }
     }, [])
 
-    async function getTopAnime() {
-        setLoading(true)
-        const apiFetch = await fetch(`https://api.jikan.moe/v4/top/anime?limit=4&page=1&filter=airing`)
-        const data = await apiFetch.json();
-        setTopAnime(data.data)
-        setLoading(false)
-    }
-
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const [searchQuery, setSearchQuery] = useState("")
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        dispatch(searchType({type: searchQuery}))
-        navigate("/search")
-    }
-
 
     return (
-        <section className="search-add-menu">
+        <section className="right-side-nav-bar">
             <nav>
                 <IoNotificationsOutline/>
-                {!user && <img src={DefaultAvatar} alt="default profile picture"/>}
+                {!user && <IoPersonCircleOutline/>}
                 {user &&<img src={user.photoURL} alt="user profile picture"/>}
             </nav>
             <form className="input-side-form" onSubmit={handleSubmit}>
-                <input onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search..."/>
+                <input 
+                    value={searchQuery} 
+                    onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search..."
+                />
             </form>
-            <section className="trending">
+            <section className="trending-section">
                 <h2>Top Trending</h2>
-                {loading && <h1>Loading...</h1>}
+                {loading && //This is the loading animation...
+                    <RightNavShean/>
+                }
                 {!loading && topAnime?.map(item => 
-                        <CardTemplate
+                        <TrendingCard
                             key={item.mal_id}
-                            customClass="sideMenu-cards"
-                            sidebar= "true"
                             id={item.mal_id}
-                            title={item.title}
+                            title={item.title_english}
                             image={item.images.jpg.image_url}
                             firstTag = {item.genres[0]?.name}
                             secondTag = {item.genres[1]?.name}
-                            thridTag = {item.genres[2]?.name}
                         />
                     )
-                }   
-                <Link to="discovery/anime" className="more-btn">See More</Link>
+                } 
+                {!loading && 
+                    <Link to="discovery/anime" className="more-btn">See More</Link>
+                }
             </section>
         </section>
     )

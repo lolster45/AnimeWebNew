@@ -1,74 +1,124 @@
+//React...
+import { useState, useEffect, memo } from "react"
+
 //Components...
-import { useState, useEffect } from "react"
-import {animateScroll as scroll} from "react-scroll"
 import CardTemplate from "../components/cardTemplate"
+import LoadingFB from "../components/loading-shean/loadingFB"
+
+//React icons...
+import { LuLayoutList, LuLayoutGrid } from "react-icons/lu";
 
 //styles...
 import "../styles/Anime.scss"
+import { useNavigate } from "react-router-dom"
 
-export default function AnimePage () {
-    const [topAnime, setTopAnime] = useState([])
-    const [filter, setFilter] = useState("airing")
 
-    const [limit, setLimit] = useState("15")
+const AnimePage = memo(({ layout, setLayout }) => {
+
+    const navigate = useNavigate();
+
+    //State that holds top anime from API...
+    const [topAnime, setTopAnime] = useState([]);
+
+    //Information for API...
+    const [filter, setFilter] = useState("airing");
+    const [limit, setLimit] = useState("25");
+
+    //For loading animation/helper state...
+    const [loading, setLoading] = useState(true);
+    //const [error, setError] = useState(false);
 
     //The localStorage maintains the page you were on...
     const [page, setPage] = useState(localStorage.getItem("currentAnimePage") || "1")
     localStorage.setItem("currentAnimePage", page)
 
-    useEffect(() => {
-         getTopAnime()
-    }, [page, filter])
-
+    
     async function getTopAnime() {
-        const apiFetch = await fetch(`https://api.jikan.moe/v4/top/anime?limit=${limit}&page=${page}&filter=${filter}`)
-        const data = await apiFetch.json();
-        setTopAnime(data.data)
+        try {
+            const apiFetch = await fetch(`https://api.jikan.moe/v4/top/anime?limit=${limit}&page=${page}&filter=${filter}`)
+            const data = await apiFetch.json();
+
+            setLoading(false);
+            if(data.data.length === 0) throw error;
+            
+            setTopAnime(data.data)
+        } catch (error) {
+            navigate("/error")
+        }
     }
 
+    //Functions that navigates the pages of the API...
     const handleMore = (e) => {
-        scroll.scrollToTop();
         e.currentTarget.parentElement.classList.add("more");
         setPage(prev => +prev + +"1")
     }
     const handleLess = (e) => {
-        scroll.scrollToTop();
         e.currentTarget.parentElement.classList.remove("more")
         setPage(prev => +prev - +"1")
     }
+
+    //Hadles layout change....
+    const handleLayoutChange = () => {
+        setLayout(prev => !prev)
+    }
+
+
+    
+    
+    useEffect(() => {
+        getTopAnime()
+    }, [page, filter])
+
+
 
     return (
         <section className="anime-page">
             <nav className="anime-nav-filter">
                 <h2>Top Anime</h2>
-                <select onChange={(e) => {
-                    setPage("1")
-                    setFilter(e.target.value)
-                }}>
-                    <option value="bypopularity">Popularity</option>
-                    <option value="airing">Airing</option>
-                    <option value="upcoming">Upcoming</option>
-                    <option value="favorite">Favorite</option>
-                </select>
+                <div>
+                    <span onClick={handleLayoutChange}>
+                        {layout && <LuLayoutGrid/>}
+                        {!layout && <LuLayoutList/>}
+                    </span>
+                    <select onChange={(e) => {
+                        setPage("1")
+                        setFilter(e.target.value)
+                    }}>
+                        <option value="airing">Airing</option>
+                        <option value="upcoming">Upcoming</option>
+                        <option value="bypopularity">Popularity</option>
+                        <option value="favorite">Favorite</option>
+                    </select>
+                </div>
             </nav>
-            {/* <h2>Top Anime </h2> */}
-            <div className="anime-grid">
-                {
-                    topAnime?.map((item) => (
-                        <CardTemplate
-                            key={item.mal_id}
-                            customClass="card"
-                            id={item.mal_id}
-                            title={item.title}
-                            image={item.images.jpg.image_url}
-                        />
+            <div className={`anime-grid ${layout ? "active" : ""}`}>
+                {loading && 
+                    <LoadingFB/>
+                }
+                {!loading &&
+                    topAnime?.map((item, i) => (
+                            <CardTemplate
+                                key={i}
+                                customClass="card"
+                                id={item.mal_id}
+                                type={"anime"}
+                                title={item.title_english}
+                                backUpTitle={item.title}
+                                image={item.images.jpg.image_url}
+                                layout={layout}
+                                score={item.score}
+                                synopsis={item.synopsis}
+                            />
                     ))
-                }   
+                }
+                
             </div>
             <div className="page-nav">
                 {page > 1 && <button onClick={handleLess}>Go Back</button>}
                 <button onClick={handleMore}>Next Page</button>
-            </div>
+            </div> 
         </section>
-    )
-}
+    );
+});
+
+export default AnimePage

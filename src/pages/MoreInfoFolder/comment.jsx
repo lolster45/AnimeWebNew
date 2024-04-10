@@ -1,9 +1,14 @@
+//React...
 import { useState } from "react"
+
+//Styles...
 import "./comment.scss"
 
 export default function Comment ({data, review, score, user, image}) {
 
-    const [expanded, setExpanded] = useState(false)
+    //State for expanding review/see more...
+    const [expanded, setExpanded] = useState(false);
+    
     const commentPreview = `${review.slice(0, 100)}...`
 
     return (

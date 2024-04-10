@@ -1,0 +1,35 @@
+.trending-cards {
+    position: relative;
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    &:first-of-type {
+        margin-top: 40px;
+    }
+    //background-color: aqua;
+
+    > div {
+        height: 100%;
+        width: 60%;
+        h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        span {
+            padding-left: 10px;
+            font-size: 0.6rem;
+            color: var(--green-color);
+        }
+    }
+
+    a {
+        position: relative;
+        width: 30%;
+        img {
+            width: 100%;
+        }
+    }
+}

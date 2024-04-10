@@ -12,17 +12,12 @@
     color: white;
     background-color: black;
     font-family: var(--main-font);
-
     &::-webkit-scrollbar {
         display: none;
     }
-      
     /* Hide scrollbar for IE, Edge and Firefox */
-    
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    
-
     nav {
         text-align: start;
         margin-top: 20px;
@@ -34,28 +29,14 @@
         a {
             margin-right: 25px;
             text-decoration: none;
-
             font-size: 24px;
             color: white;
         }
     }
-
-
     .home-routes {
         position: relative;
         height: auto;
         width: 100%;
         background-color: black;
-    }
-}
-
-// .season-card {
-//     background-color: red;
-// }
-
-
-@media screen and (max-width: 990px) {
-    .home-page {
-        background-color: red;
     }
 }

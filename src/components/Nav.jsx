@@ -1,50 +1,60 @@
 //Components...
 import { useState } from "react"
 import {Link} from "react-router-dom"
+
+//Firebase...
 import {auth} from "../config/firebase"
 import {signOut} from "firebase/auth"
 import {useAuthState} from "react-firebase-hooks/auth"
 
-
-//Styles...
-import "../styles/Nav.scss"
-
 //React Icons...
-import {AiFillHome, AiOutlineClockCircle} from "react-icons/ai"
+import {AiFillHome} from "react-icons/ai"
 import {BsCompass, BsJournalBookmarkFill} from "react-icons/bs"
 import {FaDiscord} from "react-icons/fa"
 import {IoLogOutOutline} from "react-icons/io5"
 import {IoIosLogIn} from "react-icons/io"
 
+//Images...
+import Logo from "/logo.png"
 
+//React redux toolkit...
 import { useDispatch } from "react-redux"
 import { nameInput } from "../store"
 
+//Styles...
+import "../styles/Nav.scss"
 
 
 export default function Nav () {
-    const dispatch = useDispatch()
+    //Firebase...
     const [user] = useAuthState(auth)
-    const [active, setActive] = useState("home")
 
+    //React toolkit...
+    const dispatch = useDispatch()
+    
+    //Sets the coloring for showing which tab is active...
+    const [active, setActive] = useState("home")
     const activeNav = (navLink) => {
         setActive(navLink)
     }
 
+    //Signs user out of firebase...
     const userSignOut = async () => {
         await signOut(auth)
     }
 
-    const handleAnimeClick = (e) => {
-        //localStorage.setItem("currentAnimePage", "1")
+    //Set the type of content for redux toolkit...
+    const handleAnimeClick = () => {
         dispatch(nameInput({type: "anime"}))
-        //console.log("it works")
     }
     
 
     return (
         <section className="home-nav">
-            <h1>LOGO</h1>
+            <div className="logo-main">
+                <img src={Logo}/>
+                <h1>neanime</h1>
+            </div>
             <nav>
                 <h2>MENU</h2>
                 <ul>
@@ -60,6 +70,7 @@ export default function Nav () {
                         onClick={() => {
                             activeNav("discovery")
                             handleAnimeClick()
+                     
                         }} 
                         className={`menu-item ${active === "discovery" ? "active" : ""}`} 
                     >
@@ -79,10 +90,6 @@ export default function Nav () {
             <nav>
                 <h2>LIBRARY</h2>
                 <ul>
-                    {/* <Link className={`menu-item ${active === "recent" ? "active" : ""}`} onClick={() => activeNav("recent")} to="/recent">
-                        <AiOutlineClockCircle className={`icon ${active === "recent" ? "active": ""}`}/>
-                        Recent
-                    </Link> */}
                     <Link 
                         to="/bookmarks"
                         onClick={() => {
@@ -98,7 +105,7 @@ export default function Nav () {
             <nav className="user-account">
                 {!user && 
                     <div>
-                        <Link className="login-button" to="/login"><IoIosLogIn/>Login</Link>
+                        <Link className="login-button" to="/login"><IoIosLogIn/>Sign Up</Link>
                     </div>
                 }
                 {user && (

@@ -2,7 +2,9 @@ import {configureStore, createSlice} from '@reduxjs/toolkit';
 
 const typeApi = createSlice({
     name: "type",
-    initialState: {value: {type: ""}},
+    initialState: {
+        value: {type: ""}
+    },
     reducers: {
         nameInput: (state, action) => {
             state.value = action.payload;

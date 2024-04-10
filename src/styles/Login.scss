@@ -1,43 +1,59 @@
 .login-page {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-
     height: 100vh;
-    width: 60%;
-    background-color: black;
-
-    & > article {
+    width: 100%;
+    background-image: url("/anime(collage)-cropped.jpg");
+    font-family: var(--main-font);
+    .login-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.687);
+    }
+    article {
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 10px;
         height: 400px;
         width: 400px;
-        background-color: var(--nav-bg-color);
-
+        box-shadow: 0px 2px 44px 7px rgba(0,0,0,0.7);
+        -webkit-box-shadow: 0px 2px 44px 7px rgba(0,0,0,0.7);
+        -moz-box-shadow: 0px 2px 44px 7px rgba(0,0,0,0.7);
+        background-color: rgb(27, 26, 26);
+        .singIn-title {
+            position: absolute;
+            font-size: 1.4rem;
+            color: white;
+            top: 10px;
+        }
         button {
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 40px;
+            height: 45px;
             width: 80%;
-            color: rgb(91, 89, 89);
-            outline: none;
             border: none;
+            border-radius: 50px;
+            outline: none;
+            color: black;
             background-color: white;
-    
-            &:hover {
-                background-color: rgb(237, 235, 235);
-            }
-    
-            & > svg {
+            > svg {
                 margin-right: 10px;
                 font-size: 23px;
             }
         }
     }
-    
+}
+
+@media screen and (max-width: 990px) {
+    .login-page {
+        width: 100%;
+    }
 }
