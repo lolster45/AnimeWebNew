@@ -18,7 +18,6 @@ import {searchType} from "../store"
 import {IoNotificationsOutline} from "react-icons/io5"
 import { IoPersonCircleOutline } from "react-icons/io5";
 
-
 //Styles... 
 import "../styles/SideMenu.scss"
 
@@ -74,7 +73,7 @@ export default function AddMenu () {
             <nav>
                 <IoNotificationsOutline/>
                 {!user && <IoPersonCircleOutline/>}
-                {user &&<img src={user.photoURL} alt="user profile picture"/>}
+                {user && <img src={user.photoURL} alt="user profile picture"/>}
             </nav>
             <form className="input-side-form" onSubmit={handleSubmit}>
                 <input 
