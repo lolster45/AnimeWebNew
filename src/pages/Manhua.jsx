@@ -11,6 +11,7 @@ import { LuLayoutList, LuLayoutGrid } from "react-icons/lu";
 
 //styles...
 import "../styles/Anime.scss"
+import { getTopList } from "../helperFunctions";
 
 
 export default function ManhuaPage ({layout, setLayout}) {
@@ -28,21 +29,7 @@ export default function ManhuaPage ({layout, setLayout}) {
     const [page, setPage] = useState(localStorage.getItem("currentManhuaPage") || "1")
     localStorage.setItem("currentManhuaPage", page)
 
-    async function getTopManhua() {
-        const apiKey = `https://api.jikan.moe/v4/top/manga?type=manhua&page=${page}`;
-
-        try {
-            const apiFetch = await fetch(apiKey)
-            const data = await apiFetch.json();
-
-            setLoading(false)
-            if(data.data.length === 0) throw error
-
-            setTopManhua(data.data) 
-        } catch (error) {
-            navigate("/error")
-        }
-    }
+  
 
      //Pagination navigation...
     const handleMore = (e) => {
@@ -58,8 +45,12 @@ export default function ManhuaPage ({layout, setLayout}) {
         setLayout(prev => !prev)
     }
 
+
+    
+
+    const manhuaAPI = `https://api.jikan.moe/v4/top/manga?type=manhua&page=${page}`;
     useEffect(() => {
-        getTopManhua()
+        getTopList(manhuaAPI, setTopManhua, setLoading, navigate)
     }, [page])
 
     return (

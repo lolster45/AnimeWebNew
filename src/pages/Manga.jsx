@@ -9,6 +9,9 @@ import LoadingFB from "../components/loading-shean/loadingFB"
 //React icons...
 import { LuLayoutList, LuLayoutGrid } from "react-icons/lu";
 
+//helper functions...
+import { getTopList } from "../helperFunctions";
+
 //Styles...
 import "../styles/Anime.scss"
 
@@ -18,7 +21,7 @@ export default function Manga ({layout, setLayout}) {
 
 
     //State that holds top anime from API...
-    const [topManhwa, setTopManhwa] = useState([]);
+    const [topManga, setTopManga] = useState([]);
 
     //API information...
     const [filter, setFilter] = useState("publishing");
@@ -32,22 +35,7 @@ export default function Manga ({layout, setLayout}) {
     const [page, setPage] = useState(localStorage.getItem("currentMangaPage") || "1")
     localStorage.setItem("currentMangaPage", page)
 
-    async function getTopManhwa() {
-        const apiGetTwo = 
-            `https://api.jikan.moe/v4/top/manga?filter=${filter}&limit=${limit}&page=${page}`;
-
-        try {
-            const apiFetch = await fetch(apiGetTwo)
-            const data = await apiFetch.json();
-
-            setLoading(false)
-            if(data.data.length === 0) throw error
-            
-            setTopManhwa(data.data)
-        } catch (error) {
-            navigate("/error")
-        }
-    }
+    
 
     //Pagination navigation...
     const handleMore = (e) => {
@@ -63,8 +51,11 @@ export default function Manga ({layout, setLayout}) {
         setLayout(prev => !prev)
     }
     
+
+    const mangaAPI = `https://api.jikan.moe/v4/top/manga?filter=${filter}&limit=${limit}&page=${page}`;
+
     useEffect(() => {
-        getTopManhwa()
+        getTopList(mangaAPI, setTopManga, setLoading, navigate);
     }, [page, filter])
 
     return (
@@ -73,7 +64,7 @@ export default function Manga ({layout, setLayout}) {
             <nav className="anime-nav-filter">
                 <h2>Top Anime</h2>
                 <div>
-                    <button onClick={() => console.log(topManhwa)}>CLICK</button>
+                    <button onClick={() => console.log(topManga)}>CLICK</button>
                     <span onClick={handleLayoutChange}>
                         {layout && <LuLayoutGrid/>}
                         {!layout && <LuLayoutList/>}
@@ -93,7 +84,7 @@ export default function Manga ({layout, setLayout}) {
                     <LoadingFB/>
                 }
                 {!loading &&
-                    topManhwa.map(item => (
+                    topManga.map(item => (
                         <CardTemplate
                             key={item.mal_id}
                             customClass="card"

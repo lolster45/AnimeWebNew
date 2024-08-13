@@ -9,7 +9,7 @@ import LoadingFB from "../components/loading-shean/loadingFB"
 import { LuLayoutList, LuLayoutGrid } from "react-icons/lu";
 
 //Helper functions...
-import { getTopList } from "../helperFunctions";
+import { getTopList, handleMore, handleLess, handleLayoutChange} from "../helperFunctions";
 
 //styles...
 import "../styles/Anime.scss"
@@ -37,37 +37,11 @@ const AnimePage = memo(({ layout, setLayout }) => {
     localStorage.setItem("currentAnimePage", page)
 
     
-    // async function getTopAnime() {
-    //     try {
-    //         const apiFetch = await fetch(`https://api.jikan.moe/v4/top/anime?limit=${limit}&page=${page}&filter=${filter}`)
-    //         const data = await apiFetch.json();
-
-    //         setLoading(false);
-    //         if(data.data.length === 0) throw error;
-            
-    //         setTopAnime(data.data)
-    //     } catch (error) {
-    //         navigate("/error")
-    //     }
-    // }
-
-    //Functions that navigates the pages of the API...
-    const handleMore = (e) => {
-        e.currentTarget.parentElement.classList.add("more");
-        setPage(prev => +prev + +"1")
-    }
-    const handleLess = (e) => {
-        e.currentTarget.parentElement.classList.remove("more")
-        setPage(prev => +prev - +"1")
-    }
-    //Hadles layout change....
-    const handleLayoutChange = () => {
-        setLayout(prev => !prev)
-    }
 
 
+    const animeAPI = `https://api.jikan.moe/v4/top/anime?limit=${limit}&page=${page}&filter=${filter}`;
     useEffect(() => {
-        getTopList(limit, page, filter, setTopAnime, setLoading, navigate)
+        getTopList(animeAPI, setTopAnime, setLoading, navigate)
     }, [page, filter])
 
 
@@ -77,7 +51,7 @@ const AnimePage = memo(({ layout, setLayout }) => {
             <nav className="anime-nav-filter">
                 <h2>Top Anime</h2>
                 <div>
-                    <span onClick={handleLayoutChange}>
+                    <span onClick={() => handleLayoutChange(setLayout)}>
                         {layout && <LuLayoutGrid/>}
                         {!layout && <LuLayoutList/>}
                     </span>
@@ -115,8 +89,10 @@ const AnimePage = memo(({ layout, setLayout }) => {
                 
             </div>
             <div className="page-nav">
-                {page > 1 && <button onClick={handleLess}>Go Back</button>}
-                <button onClick={handleMore}>Next Page</button>
+                {page > 1 && 
+                <button onClick={(e) => handleLess(e, setPage)}>Go Back</button>
+                }
+                <button onClick={(e) => handleMore(e, setPage)}>Next Page</button>
             </div> 
         </section>
     );

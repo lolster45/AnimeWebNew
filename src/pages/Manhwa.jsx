@@ -64,8 +64,9 @@ export default function ManhwaPage ({layout, setLayout}) {
         setLayout(prev => !prev)
     }
 
+    const manhwaAPI = `https://api.jikan.moe/v4/top/manga?type=manhwa&limit=${limit}&page=${page}`;
     useEffect(() => {
-        getTopManhwa()
+        getTopManhwa(manhwaAPI, setTopManhwa, setLoading, navigate)
    }, [page])
 
     return (
