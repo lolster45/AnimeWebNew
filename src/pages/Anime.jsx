@@ -8,9 +8,13 @@ import LoadingFB from "../components/loading-shean/loadingFB"
 //React icons...
 import { LuLayoutList, LuLayoutGrid } from "react-icons/lu";
 
+//Helper functions...
+import { getTopList } from "../helperFunctions";
+
 //styles...
 import "../styles/Anime.scss"
 import { useNavigate } from "react-router-dom"
+
 
 
 const AnimePage = memo(({ layout, setLayout }) => {
@@ -33,19 +37,19 @@ const AnimePage = memo(({ layout, setLayout }) => {
     localStorage.setItem("currentAnimePage", page)
 
     
-    async function getTopAnime() {
-        try {
-            const apiFetch = await fetch(`https://api.jikan.moe/v4/top/anime?limit=${limit}&page=${page}&filter=${filter}`)
-            const data = await apiFetch.json();
+    // async function getTopAnime() {
+    //     try {
+    //         const apiFetch = await fetch(`https://api.jikan.moe/v4/top/anime?limit=${limit}&page=${page}&filter=${filter}`)
+    //         const data = await apiFetch.json();
 
-            setLoading(false);
-            if(data.data.length === 0) throw error;
+    //         setLoading(false);
+    //         if(data.data.length === 0) throw error;
             
-            setTopAnime(data.data)
-        } catch (error) {
-            navigate("/error")
-        }
-    }
+    //         setTopAnime(data.data)
+    //     } catch (error) {
+    //         navigate("/error")
+    //     }
+    // }
 
     //Functions that navigates the pages of the API...
     const handleMore = (e) => {
@@ -56,17 +60,14 @@ const AnimePage = memo(({ layout, setLayout }) => {
         e.currentTarget.parentElement.classList.remove("more")
         setPage(prev => +prev - +"1")
     }
-
     //Hadles layout change....
     const handleLayoutChange = () => {
         setLayout(prev => !prev)
     }
 
 
-    
-    
     useEffect(() => {
-        getTopAnime()
+        getTopList(limit, page, filter, setTopAnime, setLoading, navigate)
     }, [page, filter])
 
 
