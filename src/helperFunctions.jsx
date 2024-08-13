@@ -1,15 +1,14 @@
-async function getTopList(limit, page, filter, setTopAnime, setLoading, navigate) {
 
-    const api = `https://api.jikan.moe/v4/top/anime?limit=${limit}&page=${page}&filter=${filter}`;
 
+
+async function getTopList(api, setTopState, setLoading, navigate) {
     try {
         const apiFetch = await fetch(api);
         const data = await apiFetch.json();
         if(data.data.length === 0) throw error;
 
+        setTopState(data.data);
         setLoading(false);
-        setTopAnime(data.data);
-
     } 
     catch (error) {
         console.log(error)
@@ -17,4 +16,18 @@ async function getTopList(limit, page, filter, setTopAnime, setLoading, navigate
     }
 }
 
-export {getTopList}
+ //Functions that navigates the pages of the API...
+ const handleMore = (e, setPage) => {
+    e.currentTarget.parentElement.classList.add("more");
+    setPage(prev => +prev + +"1")
+}
+const handleLess = (e, setPage) => {
+    e.currentTarget.parentElement.classList.remove("more")
+    setPage(prev => +prev - +"1")
+}
+//Hadles layout change....
+const handleLayoutChange = (setLayout) => {
+    setLayout(prev => !prev)
+}
+
+export {getTopList, handleMore, handleLess, handleLayoutChange}
