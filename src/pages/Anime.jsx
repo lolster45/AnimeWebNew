@@ -2,8 +2,8 @@
 import { useState, useEffect, memo } from "react"
 
 //Components...
-import CardTemplate from "../components/cardTemplate"
-import LoadingFB from "../components/loading-shean/loadingFB"
+import BottomNav from "../components/BottomPageNav/BottomNav";
+import GridItems from "../components/GridItems/GridItems";
 
 //React icons...
 import { LuLayoutList, LuLayoutGrid } from "react-icons/lu";
@@ -30,20 +30,16 @@ const AnimePage = memo(({ layout, setLayout }) => {
 
     //For loading animation/helper state...
     const [loading, setLoading] = useState(true);
-    //const [error, setError] = useState(false);
 
     //The localStorage maintains the page you were on...
     const [page, setPage] = useState(localStorage.getItem("currentAnimePage") || "1")
     localStorage.setItem("currentAnimePage", page)
 
     
-
-
     const animeAPI = `https://api.jikan.moe/v4/top/anime?limit=${limit}&page=${page}&filter=${filter}`;
     useEffect(() => {
-        getTopList(animeAPI, setTopAnime, setLoading, navigate)
+        getTopList(animeAPI, setTopAnime, setLoading, navigate);
     }, [page, filter])
-
 
 
     return (
@@ -65,35 +61,15 @@ const AnimePage = memo(({ layout, setLayout }) => {
                         <option value="favorite">Favorite</option>
                     </select>
                 </div>
-            </nav>
-            <div className={`anime-grid ${layout ? "active" : ""}`}>
-                {loading && 
-                    <LoadingFB/>
-                }
-                {!loading &&
-                    topAnime?.map((item, i) => (
-                            <CardTemplate
-                                key={i}
-                                customClass="card"
-                                id={item.mal_id}
-                                type={"anime"}
-                                title={item.title_english}
-                                backUpTitle={item.title}
-                                image={item.images.jpg.image_url}
-                                layout={layout}
-                                score={item.score}
-                                synopsis={item.synopsis}
-                            />
-                    ))
-                }
-                
-            </div>
-            <div className="page-nav">
-                {page > 1 && 
-                <button onClick={(e) => handleLess(e, setPage)}>Go Back</button>
-                }
-                <button onClick={(e) => handleMore(e, setPage)}>Next Page</button>
-            </div> 
+            </nav>  
+            <GridItems data={topAnime} layout={layout} loading={loading}/>
+            <BottomNav 
+                styles='page-nav' 
+                handleMore={handleMore} 
+                handleLess={handleLess} 
+                page={page} 
+                setPage={setPage}
+            />
         </section>
     );
 });
