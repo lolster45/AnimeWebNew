@@ -92,10 +92,9 @@ function App() {
                 <Route path="/search" element={<Search />} />
                 <Route path="/community" element={<Community />} />
                 <Route path="/bookmarks" element={<Collection />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<Login />}/>
+                <Route path="/login/admin-login" element={<Login admin={true} />}/>
                 <Route path="/error" element={<ErroPage />} />
-
-                {/* <Route path="/spinner" element={<SpinnerPage/>}/> */}
               </Routes>
             </Suspense>
           </div>
