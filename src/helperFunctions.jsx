@@ -20,6 +20,10 @@ async function getTopList(api, setTopState, setLoading, navigate) {
  const handleMore = (e, setPage) => {
     e.currentTarget.parentElement.classList.add("more");
     setPage(prev => +prev + +"1")
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Smooth scroll to the top
+    });
 }
 const handleLess = (e, setPage) => {
     e.currentTarget.parentElement.classList.remove("more")
