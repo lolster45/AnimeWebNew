@@ -90,7 +90,6 @@ export default function Login({signUp = false}) {
             await signInWithEmailAndPassword(auth, formInput.email, formInput.password);
             setFormInput({email: "", password: ""});
             navigate("/")
-            
         } 
         catch (error) {
             if(error.code === 'auth/wrong-password') {
@@ -121,7 +120,6 @@ export default function Login({signUp = false}) {
             return;
         }
 
-
         try {
             await createUserWithEmailAndPassword(auth, formInput.email, formInput.password)
             setFormInput({email: "", password: ""});
@@ -138,7 +136,9 @@ export default function Login({signUp = false}) {
         }
     }
 
-
+    const handleSignUpLoginPageSwap = () => {
+        setEmailError("");
+    }
 
     useEffect(() => {
         if(user) navigate("/")
@@ -151,7 +151,10 @@ export default function Login({signUp = false}) {
                     <h2 className="signIn-header">{signUp ? "Sign Up" : "Log In"}</h2>
                     <div className="email-login">
                             <label>
-                                <span>Email: <span className="error-output">{emailError && emailError}</span></span>
+                                <span>
+                                    Email: 
+                                    <span className="error-output">{emailError && emailError}</span>
+                                </span>
                                 <input 
                                     type="text"
                                     name="email" 
@@ -180,8 +183,18 @@ export default function Login({signUp = false}) {
                         {loading ? "Loading..." : "Continue"}
                     </button>
                     <span className="login-page-link">
-                        Don't have an Account? Click 
-                        <Link to='/signUp'>Here</Link>
+                        {!signUp && 
+                            <>
+                                Don't have an Account? Click 
+                                <Link onClick={handleSignUpLoginPageSwap} to='/signUp'>Here</Link>
+                            </>
+                        }
+                        {signUp && 
+                            <>
+                                Already have an Account? Click 
+                                <Link onClick={handleSignUpLoginPageSwap} to='/login'>Here</Link>
+                            </>
+                        }
                     </span>
             </form>
         </section>
