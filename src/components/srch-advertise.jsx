@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux"
 import {searchType} from "../store"
 
 //Images/icons...
+import ProfilePic from "../../public/standard-profile-pic.jpg"
 import {IoNotificationsOutline} from "react-icons/io5"
 import { IoPersonCircleOutline } from "react-icons/io5";
 
@@ -73,7 +74,7 @@ export default function AddMenu () {
             <nav>
                 <IoNotificationsOutline/>
                 {!user && <IoPersonCircleOutline/>}
-                {user && <img src={user.photoURL} alt="user profile picture"/>}
+                {user && <img src={user.photoURL || ProfilePic} alt="user profile picture"/>}
             </nav>
             <form className="input-side-form" onSubmit={handleSubmit}>
                 <input 
