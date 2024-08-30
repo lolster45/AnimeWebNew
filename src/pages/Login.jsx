@@ -30,11 +30,11 @@ export default function Login({signUp = false}) {
         email: "",
         password: ""
     })
+    const [loading, setLoading] = useState(false);
 
 
     const handleInput = (e) => {
         const {name, value} = e.target;
-
         setFormInput(prev => ({
             ...prev,
             [name]: value
@@ -78,36 +78,63 @@ export default function Login({signUp = false}) {
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
+        
+        if(!formInput.email || !formInput.password) {
+            setEmailError("Email or Password is empty...")
+            return;
+        }
+
+        setLoading(true);
        
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, formInput.email, formInput.password);
-            const user = userCredential.user;
-            if(user) {
-                navigate("/")
+            await signInWithEmailAndPassword(auth, formInput.email, formInput.password);
+            setFormInput({email: "", password: ""});
+            navigate("/")
+            
+        } 
+        catch (error) {
+            if(error.code === 'auth/wrong-password') {
+                setEmailError("Wrong password....");
+                return;
             }
-        } catch (error) {
-            console.error("Error logging in:", error);
+            else if(error.code === 'auth/user-not-found') {
+                setEmailError("User does not exists...");
+                return;
+            }
+            else {
+                console.error("Error logging in:", error);
+            }
+        }
+        finally {
+            setLoading(false);
         }
               
     }
 
+    const [emailError, setEmailError] = useState("")
 
     const handleSignUpSubmit = async (e) => {
         e.preventDefault();
+
+        if(!formInput.email || !formInput.password) {
+            setEmailError("Email or Password is empty...")
+            return;
+        }
+
+
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, formInput.email, formInput.password);
-            const user = userCredential.user;
-
-            if(user) {
-                setFormInput({email: "", password: ""});
-                console.log("User signed up:", user);
-                navigate("/")
-            }
-
-
+            await createUserWithEmailAndPassword(auth, formInput.email, formInput.password)
+            setFormInput({email: "", password: ""});
+            navigate("/")
         } 
         catch (error) {
-            console.error("Error signing up:", error);
+            if(error.code === 'auth/email-already-in-use') {
+                setEmailError("email already exists...")
+                return;
+            }
+            else {
+                console.error("Error signing up:", error)
+            }
         }
     }
 
@@ -121,13 +148,10 @@ export default function Login({signUp = false}) {
         <section className="login-page">
             <div className="login-overlay"></div>
             <form onSubmit={signUp ? handleSignUpSubmit : handleLoginSubmit}>
-
-
                     <h2 className="signIn-header">{signUp ? "Sign Up" : "Log In"}</h2>
-
                     <div className="email-login">
                             <label>
-                                Email:
+                                <span>Email: <span className="error-output">{emailError && emailError}</span></span>
                                 <input 
                                     type="text"
                                     name="email" 
@@ -144,26 +168,22 @@ export default function Login({signUp = false}) {
                                     onChange={handleInput}
                                 />
                             </label>
-
-
                     </div>
-
-                    <button className="google-btn" onClick={signUpWithGoogle}>
+                    <button type="button" className="google-btn" onClick={signUpWithGoogle}>
                         <FcGoogle/>
-                        Sign in with Google
+                        Sign {signUp ? "up" : "in"} with Google
+                    </button>  
+                    <button 
+                        className="email-submit-btn"
+                        disabled={loading}
+                    >
+                        {loading ? "Loading..." : "Continue"}
                     </button>
-            
-                   
-                    <button className="email-submit-btn">Submit</button>
-
                     <span className="login-page-link">
                         Don't have an Account? Click 
                         <Link to='/signUp'>Here</Link>
                     </span>
-            
             </form>
-
-            
         </section>
     )
 }
