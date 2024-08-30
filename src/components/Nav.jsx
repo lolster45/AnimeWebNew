@@ -13,6 +13,8 @@ import {BsCompass, BsJournalBookmarkFill} from "react-icons/bs"
 import {FaDiscord} from "react-icons/fa"
 import {IoLogOutOutline} from "react-icons/io5"
 import {IoIosLogIn} from "react-icons/io"
+import { IoAnalytics } from "react-icons/io5";
+
 
 //Images...
 import Logo from "/logo.png"
@@ -21,13 +23,18 @@ import Logo from "/logo.png"
 import { useDispatch } from "react-redux"
 import { nameInput } from "../store"
 
+
+const adminId = import.meta.env.VITE_ADMIN_ID;
+
+
 //Styles...
 import "../styles/Nav.scss"
 
 
 export default function Nav () {
     //Firebase...
-    const [user] = useAuthState(auth)
+    const [user] = useAuthState(auth);
+
 
     //React toolkit...
     const dispatch = useDispatch()
@@ -74,7 +81,8 @@ export default function Nav () {
                         }} 
                         className={`menu-item ${active === "discovery" ? "active" : ""}`} 
                     >
-                        <BsCompass className={`icon ${active === "discovery" ? "active": ""}`}/>Discovery
+                        <BsCompass className={`icon ${active === "discovery" ? "active": ""}`}/>
+                        Discovery
                     </Link>
                     {user &&
                         <Link 
@@ -84,6 +92,15 @@ export default function Nav () {
                         >
                             <FaDiscord className={`icon ${active === "community" ? "active": ""}`}/>Community
                         </Link>
+                    }
+                    { user?.uid === adminId &&
+                    <Link 
+                        to="/admin-dashboard"
+                        onClick={() => activeNav('analytics')}
+                    >
+                            <IoAnalytics className={`icon ${active === "analytics" ? "active": ""}`}/>
+                            Analytics
+                    </Link>
                     }
                 </ul>
             </nav>
@@ -105,7 +122,7 @@ export default function Nav () {
             <nav className="user-account">
                 {!user && 
                     <div>
-                        <Link className="login-button" to="/login"><IoIosLogIn/>Sign Up</Link>
+                        <Link className="login-button" to="/login"><IoIosLogIn/>Log In</Link>
                     </div>
                 }
                 {user && (
