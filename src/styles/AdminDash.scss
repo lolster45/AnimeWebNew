@@ -1,6 +1,73 @@
 .admin-dash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    padding-top: 40px;
     height: 100vh;
     color: white;
     background-color: black;
+
+
+
+
+
+    .all-users-table{
+        position: relative;
+        padding: 20px;
+        height: 400px;
+        width: 80%;
+        //border: 1px solid red;
+        background-color: rgb(38, 38, 38);
+        .search-bar-wrap {
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 15%;
+            width: 100%;
+            margin-bottom: 9px;
+            //background-color: red;
+            input {
+                height: 35px;
+                width: 70%;
+                border: none;
+                outline: none;
+                border-radius: 50px;
+                padding-left: 10px;
+                color: white;
+                background-color: rgb(71, 71, 71);
+                &::placeholder {
+                    color: rgb(156, 156, 156);
+                }
+
+            }
+            svg {
+                cursor: pointer;
+                padding-left: 7px;
+                font-size: 1.8rem;
+            }
+        }
+        
+        .users-table {
+            height: 85%;
+            width: 100%;
+            border: 1px solid gray;
+            .table-content {
+                font-size: 0.8rem;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding-left: 10px;
+                height: 30px;
+                border: none;
+                svg {
+                    color: rgb(7, 155, 7);
+                }
+                &.ban-user-btn {
+                    cursor: pointer;
+                }   
+            }
+        }
+    }
 }
 

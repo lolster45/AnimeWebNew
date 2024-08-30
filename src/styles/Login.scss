@@ -53,6 +53,15 @@
                     font-size: 0.9rem;
                     color: white;
                     //background-color: red;
+                    span {
+
+
+                        .error-output {
+                            font-size: 0.8rem;
+                            margin-left: 5px;
+                            color: red;
+                        }
+                    }
 
                     input {
                         margin-top: 10px;
