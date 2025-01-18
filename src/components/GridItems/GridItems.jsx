@@ -3,7 +3,8 @@ import React from 'react';
 
 //components... 
 import CardTemplate from '../cardTemplate';
-import LoadingFB from '../loading-shean/loadingFB';
+import LoadingFB from '../loading-shean/LoadingFB.jsx';
+
 
 //Styles...
 import "../GridItems/gridItems.scss"
