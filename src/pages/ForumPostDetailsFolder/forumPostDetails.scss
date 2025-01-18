@@ -1,0 +1,150 @@
+
+.comment-details-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-top: 250px;
+    overflow-y: scroll;
+    background-color: black;
+
+    .forum-detail-post-wrap {
+        overflow-y: scroll;
+        position: relative;
+        margin-bottom: 20px;
+        background-color: red;
+        width: 90%;
+    }
+
+    > h1 {
+        width: 90%;
+        font-size: 1.4rem;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        //background-color: red;
+        color: white;
+    }
+
+
+    .post {
+        padding: 15px;
+        min-height: 200px;
+        height: auto;
+        width: 90%; 
+        margin-bottom: 10px;
+        color: white;
+        background-color: rgb(39, 39, 39);
+        .post-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            //background-color: blue;
+            .top-left {
+                display: flex;
+                align-items: center;
+                img {
+                    margin-right: 10px;
+                    border-radius: 50%;
+                    width: 40px;
+                }
+                div {
+
+                }
+            }
+            .top-right {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                width: 125px;
+                font-size: 0.8rem;
+                span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 5px;
+                    width: 100%;
+                    svg {
+                        font-size: 1rem;
+                    }
+                    img {
+                        width: 20px;
+                    }
+                }
+            }
+
+        }
+        .post-middle {
+            min-height: 70px;
+            margin-bottom: 20px;
+            //background-color: red;
+            h2 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            p {
+                font-size: 0.8rem;
+                padding-left: 10px;
+                line-height: 30px;
+                color: rgb(224, 224, 224);
+            }
+        }
+        .post-bottom {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+
+
+    .form-input {
+        position: fixed;
+        bottom: 0px;
+        height: 220px;
+        width: 55%;
+        padding: 10px;
+        background-color: rgb(31, 31, 31);
+
+        .form-top-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.7rem;
+            color: white;
+            //background-color: blue;
+
+            .top-left {
+                display: flex;
+                align-items: center;
+                //background-color: green;
+                img {
+                    border-radius: 50%;
+                    width: 25px;
+                    margin-right: 8px;
+                }
+            }
+
+            .top-right {
+                cursor: pointer;
+                //background-color: orange;
+            }
+            
+           
+        }
+
+        textarea {
+            height: 70%;
+            width: 60%;
+            border: none;
+            outline: none;
+            padding: 10px;
+            color: white;
+            background-color: rgb(58, 58, 58);
+        }
+    }
+
+}

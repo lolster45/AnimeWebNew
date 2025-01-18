@@ -1,0 +1,195 @@
+.admin-dash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    padding-top: 40px;
+    height: 100vh;
+    color: white;
+    background-color: black;
+    .all-users-table{
+        position: relative;
+        padding: 15px;
+        height: 400px;
+        width: 95%;
+        border-radius: 10px;
+        background-color: rgb(38, 38, 38);
+        .search-bar-wrap {
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 15%;
+            width: 100%;
+            margin-bottom: 9px;
+            //background-color: red;
+            input {
+                height: 35px;
+                width: 70%;
+                border: none;
+                outline: none;
+                border-radius: 50px;
+                padding-left: 15px;
+                color: white;
+                font-size: 0.7rem;
+                background-color: rgb(24, 24, 24);
+                &::placeholder {
+                    color: rgb(156, 156, 156);
+                }
+
+            }
+            svg {
+                cursor: pointer;
+                padding-left: 7px;
+                font-size: 1.8rem;
+            }
+        }   
+        .users-table {
+            max-height: 85%;
+            width: 100%;
+            .user-row {
+                position: relative;
+                display: flex;
+                justify-content: flex-start;
+                height: 50px;
+                width: 100%;
+                &.table-titles span{
+                    padding: 0;
+                    color: white;
+                    justify-content: center;
+                    border-right: 1px solid rgb(62, 62, 62);
+                    background-color: rgb(20, 20, 20);
+                    &:last-of-type {
+                        min-width: 8%;
+                        max-width: 8%;
+                        border-right: none;
+                        color: red;
+                    }
+                }
+                &:nth-child(odd) {
+                    background-color: rgb(40, 40, 40);
+                }
+                &:nth-child(even) {
+                    background-color: rgb(30, 30, 30);
+                }
+                span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    padding-left: 25px;
+                    font-size: 0.8rem;
+                    color: rgb(219, 218, 218);
+                    &:nth-child(1) {
+                        overflow-x: hidden;
+                        min-width: 40%;
+                        max-width: 40%;
+                        //background-color: orange;
+                    }
+                    &:nth-child(2) {
+                        overflow: hidden;
+                        min-width: 42%;
+                        max-width: 42%;
+                    }
+                    &:nth-child(3) {
+                        justify-content: center;
+                        padding-left: 0;
+                        min-width: 10%;
+                        max-width: 10%;
+                        //background-color: aqua;
+                    }
+                    &:nth-child(4) {
+                        justify-content: center;
+                        padding-left: 0;
+                        min-width: 8%;
+                        max-width: 8%;
+                        //background-color: blue;
+                        svg {
+                            cursor: pointer;
+                            font-size: 1rem;
+                        }
+                    }
+                    .red {
+                        font-size: 1.3rem !important;
+                        color: red;
+                    }
+                    .green {
+                        color: rgb(70, 227, 70);
+                    }
+                }
+            }
+            .users-wrap {
+                overflow-y: scroll;
+                border: none;
+                outline: none;
+                max-height: 270px;
+
+                &::-webkit-scrollbar {
+                    width: 2px; /* Scrollbar width */
+                }
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgb(113, 113, 113); /* Scrollbar color */
+                    border-radius: 10px; /* Rounded edges */
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 530px) {
+        .all-users-table {
+            .users-table {
+                .user-row {
+                    &.table-titles span{
+                        &:last-of-type {
+                            min-width: 14%;
+                            max-width: 14%;
+                            border-right: none;
+                            color: red;
+                        }
+                    }
+                    span {
+                        &:nth-child(2) {
+                            min-width: 32%;
+                            max-width: 32%;
+                        } 
+                        &:nth-child(3) {
+                            min-width: 15%;
+                            max-width: 15%;
+                        }
+                        &:nth-child(4) {
+                          
+                            min-width: 14%;
+                            max-width: 14%;
+                           
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 400px) {
+        .all-users-table {
+            .users-table {
+                .user-row {
+                    span {
+                        &:nth-child(1) {
+                            min-width: 70%;
+                            max-width: 70%;
+                        }
+                        &:nth-child(2) {
+                            display: none;
+                        } 
+                        &:nth-child(3) {
+                            min-width: 15%;
+                            max-width: 15%;
+                        }
+                        &:nth-child(4) {
+                          
+                            min-width: 14%;
+                            max-width: 14%;
+                           
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

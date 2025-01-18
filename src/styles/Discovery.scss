@@ -1,0 +1,167 @@
+.discovery-page {
+    overflow-y: scroll;
+    margin: 0 auto;
+    height: 100vh;
+    width: 100%;
+    color: white;
+    background-color: black;
+    font-family: var(--main-font);
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    .discovery-nav {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 30px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+        > a {
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 20px;
+            color: white;
+            transition: color 0.3s ease;
+            &:hover {
+                color: var(--green-color);
+            }
+        }
+    }
+    footer {
+        margin-top: 40px;
+        padding: 15px;
+        text-align: center;
+    }
+}
+.mobile-nav-wrap {
+    display: none;
+    z-index: 29;
+    font-family: var(--main-font);
+    background-color: black;
+    .mobile-nav { //Only will appear when it reaches certain window dimensions...
+        position: fixed;
+        z-index: 100;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+        width: 95%;
+        //Centers mobile nav...
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+        //---------
+        font-size: 45px;
+        background-color: black;
+        .left-side-nav {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            width: 280px;
+            color: white;
+            .hamburger {
+                cursor: pointer;
+                width: 40px;
+                svg {
+                    font-size: 2.7rem;
+                }
+            }
+            > div {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                width: 230px;
+                
+                img {
+                    width: 50px;
+                    margin-right: 5px;
+                }
+                h5 {
+                    font-size: 1.8rem;
+                }
+                a {
+                    display: flex;
+                    align-items: center;
+                    color: white;
+                    text-decoration: none;
+                }
+            }
+        }
+        .right-side-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            width: 76px;
+            font-size: 2.5rem;
+            color: var(--green-color);
+            a {
+                text-decoration: none;
+                color: inherit;
+                svg {
+                    cursor: pointer;
+                    font-size: 1.7rem;
+                }
+            }
+            svg {
+                cursor: pointer;
+                font-size: 1.8rem;
+            }
+            img {
+                border-radius: 50%;
+                width: 30px;
+            }
+        }
+    }
+}
+@media screen and (max-width: 990px) {
+    .discovery-page {
+        overflow-x: hidden;
+        padding-top: 70px;      
+        width: 100%;
+        .discovery-nav {
+            text-align: center;
+        }
+    }
+    .mobile-nav-wrap{
+        display: block;
+        position: fixed;
+        padding: 10px;
+        height: 70px;
+        width: 100%;
+        .mobile-nav {
+            z-index: 30;
+            display: flex;
+        }
+    }
+}
+@media screen and (max-width: 455px) {
+    .discovery-page > .discovery-nav > a {
+        font-size: 14px;
+    }
+    .mobile-nav-wrap {
+        .mobile-nav .left-side-nav {
+            justify-content: left;
+            width: 100px;
+            .hamburger {
+                margin-right: 10px;
+            }
+            > div {
+                width: 180px;
+                h5 {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 345px) {
+    .discovery-page > .discovery-nav > a {
+        font-size: 10px;
+    }
+}

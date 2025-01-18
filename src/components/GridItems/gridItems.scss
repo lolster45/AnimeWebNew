@@ -1,0 +1,212 @@
+.items-grid {
+    position: relative;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    margin-top: 20px;
+    column-gap: 10px;
+    width: 100%;
+    .error-msg {
+        font-size: 6rem;
+        font-weight: 100;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .loading-animation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70vh;
+        width: 100%;
+    }
+
+    .card { //There is no info class here since its only available when "active" class is active...
+        position: relative;
+        text-decoration: none;
+        margin-bottom: 40px;
+        color: white;
+        .subHome {
+            display: flex;
+        }
+       
+        .card-image-wrap {
+            width: 100%;
+            aspect-ratio: 1 / 1.5;
+            object-fit: cover;
+        }
+        .info {
+            height: 30px;
+            margin-top: 10px;
+            .card-title {
+                font-size: 0.8rem;
+                font-weight: 700;
+            }
+        }
+    }
+
+
+
+    &.active { //This is for when the layout changes to one item per each row...
+        grid-template-columns: 100%;
+        width: 100%;
+        .card { 
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            margin-bottom: 50px;
+            height: 200px;
+            > span {
+                position: relative;
+                height: 100%;
+                width: 18%;
+                img {
+                    aspect-ratio: auto;
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+            .info {
+                position: relative;
+                height: 100%;
+                width: 82%;
+                padding-left: 15px;
+                color: white;
+                .info-top-half {
+                    display: flex;
+                    flex-direction: column;
+                    height: 80%;
+                    .card-title {
+                        padding: 0;
+                        text-align: left;
+                        font-size: 1.3rem;
+                        margin-bottom: 20px;
+                        background-color: transparent;
+                    }
+                    > p {
+                        font-size: 0.8rem;
+                        line-height: 30px;
+                        color: rgb(196, 195, 195);
+                        line-height: 30px; 
+                    }
+                }
+                .info-bottom-half {
+                    display: flex;
+                    align-items: flex-end;
+                    height: 20%;
+                    color: var(--green-color);
+                    span {
+                        font-size: 0.8rem;
+                    }
+                    span:first-of-type {
+                        margin-right: 20px;
+                    }
+                }
+            }
+        }
+        @media only screen and (max-width: 551px){
+            &:first-of-type {
+                margin-top: 80px;
+            }
+            .card {
+                height: auto;
+                flex-direction: column;
+                padding: 5px;
+                border-radius: 5px;
+                margin-bottom: 80px;
+                background-color: rgb(21, 21, 21);
+                .card-image-wrap {
+                    width: 100%  ;
+                    transform: translateY(-30px);
+                }
+
+                .info {
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+                    padding: 0;
+                    height: 200px;
+                    width: 100%;
+                    aspect-ratio: 2 / 0.3;
+                    overflow: hidden;
+                    //background-color: brown;
+                    .info-top-half {
+                        position: relative;
+                        height: 85%;
+                        width: 100%;
+                        //text-align: center;
+                        //background-color: red;
+                        .card-title {
+                            text-align: center;
+                            //background-color: blue;
+                        }
+                        p {
+                            text-align: center;
+                            padding: 2px;
+                            font-size: 0.7rem;
+                            line-height: 22px;
+                            //background-color: orange;
+                        }
+                    }
+
+                    .info-bottom-half {
+                        display: flex;
+                        justify-content: space-between;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                        font-size: 0.7rem;
+                        text-align: center;
+                        height: 15%;
+                        width: 100%;
+                        //background-color: hotpink;
+                    }
+                }
+            }
+            // .card {
+            //     flex-direction: column;
+            //     margin-bottom: 100px;
+            //     height: fit-content;
+            //     background-color: var(--nav-bg-color);
+             
+            //     .card-image-wrap {
+            //         max-width: 50%;
+            //         transform: translateY(-30px);
+            //     }
+            //     .info {
+            //         padding: 5px;
+            //         height: 140px;
+            //         width: 100%;
+            //         //background-color: orange;
+            //         .info-top-half {
+            //             text-align: center;
+
+            //             .card-title {
+            //                 margin-top: 8px;
+            //                 margin-bottom: 15px;
+            //                 text-align: center;
+            //                 width: 100%;
+            //                 //background-color: brown;
+            //             }
+            //             p {
+            //                 font-size: 0.7rem;
+            //                 padding: 15px;
+            //                 color: rgb(172, 170, 170);
+            //             }
+            //         }
+            //         .info-bottom-half {
+            //             display: flex;
+            //             justify-content: center;
+            //             gap: 20px;
+            //             font-size: 0.8rem;
+            //             margin-top: 20px;
+            //             margin-bottom: 20px;
+            //             //background-color: red;
+            //         }
+            //     }
+            // }      
+        }      
+    }
+}

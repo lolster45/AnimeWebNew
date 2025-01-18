@@ -1,0 +1,98 @@
+.forum-page-wrap {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 30px;
+    height: 100vh;
+    background-color: black;
+
+    span {
+        color: rgb(12, 246, 12);
+        margin-bottom: 20px;
+    }
+
+
+    .posts-wrap {
+        width: 90%;
+
+        .post {
+            padding: 20px;
+            height: 240px;
+            width: 100%;
+            margin-top: 50px;
+            background-color: rgb(36, 36, 36);
+            color: rgb(190, 190, 190);
+
+            .post-top {
+                display: flex;
+                justify-content: space-between;
+                //background-color: green;
+                div {
+                    display: flex;
+                    align-items: center;
+                    //background-color: red;
+                    img {
+                        width: 35px;
+                        border-radius: 50%;
+                    }
+                    div {
+                        margin-left: 10px;  
+                    }
+                }
+            }
+    
+            .post-middle {
+                margin-top: 30px;
+                margin-bottom: 40px;
+                padding: 0px 10px;
+                a {
+                    text-decoration: none;
+                    h2 {
+                        font-size: 1.2rem;
+                        margin-bottom: 10px;
+                        color: white;
+                    }
+                }
+                p {
+                    font-size: 0.8rem;
+                }
+            }
+    
+            .post-bottom {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-right: 20px;
+                
+                svg {
+                    cursor: pointer;
+                    color: white;
+                    font-size: 1.4rem;
+                }
+
+                .like-wrap {
+                    display: flex;
+                    align-items: center;
+                    //background-color: red;
+
+                    .like-single-counter {
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        margin-right: 20px;
+                        font-size: 0.9rem;
+                        color: white;
+                        svg {
+                            font-size: 0.9rem;
+                            margin-right: 6px;
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+}

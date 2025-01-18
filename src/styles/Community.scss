@@ -1,0 +1,174 @@
+.community-page {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding-bottom: 90px;
+    font-family: var(--main-font);
+    color: white;
+    background-color: black;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    .nav-location {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 85%;
+        margin-top: 50px;
+        margin-bottom: 60px;
+        a {
+            text-decoration: none;
+            
+            &:first-of-type {
+                margin-right: 10px;
+                color: gray;
+                font-size: 0.8rem;
+            }
+            &:last-child {
+                color: white;
+                font-size: 0.9rem;
+            }
+        }
+        svg {
+            color: green;
+            margin-right: 10px;
+        }
+    }
+
+    .forum-section {
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        .forum-nav {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            .left-nav {
+                width: 80%;
+                button {
+                    margin-right: 10px;
+                }
+            }
+            button {
+                cursor: pointer;
+                font-size: 0.7rem;
+                height: 40px;
+                padding: 0px 15px;
+                border: none;
+                outline: none;
+                border-radius: 10px;
+                border: 1px solid gray;
+                color: white;
+                background-color: transparent;
+            }
+        }
+
+        .forums-list-wrap {
+            .forum-row {
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+                height: 95px;
+                font-size: 0.8rem;
+                text-decoration: none;
+                border-left: 3px solid green;
+                color: white;
+                background-color: rgb(31, 31, 31);
+                &:first-of-type {
+                    margin-top: 30px;
+                }
+                .row-left {
+                    display: flex;
+                    align-items: center;
+                    padding-left: 15px;
+                    img {
+                        width: 40px;
+                        margin-right: 20px;
+                    }
+                    div {
+                        p {
+                            font-size: 0.7rem;
+                            color: gray;
+                        }
+                    }
+                }
+                .row-right {
+                    display: flex;
+                    align-items: center;
+                    padding-right: 15px;
+                }
+            }
+        }
+    }
+
+    .user-posts-container {
+        font-family: var(--main-font);
+        min-height: 300px;
+        height: auto;
+        width: 600px;
+        .user-post {
+            position: relative;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 50px;
+            background-color: var(--nav-bg-color);
+            > div {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                > img {
+                    border-radius: 50%;
+                    width: 25px;
+                    margin-right: 10px;
+                }
+            }
+            > h1 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+            > p {
+                color: rgb(197, 196, 196);
+                font-size: 13px;
+            }
+            .likes {
+                cursor: pointer;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                left: 5;
+                bottom: 8px;
+                color: white;
+                border: none;
+                background-color: var(--nav-bg-color);  
+                .no-like {
+                    color: white;
+                    font-size: 18px;
+                    margin-right: 3px;
+                }
+                .yes-like {
+                    fill: red;
+                    font-size: 18px;
+                    margin-right: 3px;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 990px) {
+    .community-page {
+        padding-top: 90px;
+        width: 100%;
+        .user-posts-container {
+            width: 80%;  
+        }
+    }
+}

@@ -1,0 +1,80 @@
+.right-side-nav-bar {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    width: 21%;
+    color: white;
+    font-family: var(--main-font);
+    background-color: var(--nav-bg-color);
+    > nav {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        padding: 10px;
+        height: 40px;
+        width: 80%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        color: var(--green-color);
+        svg {
+            margin-left: 10px;
+            font-size: 1.8rem;
+            color: var(--green-color);
+        }
+        > img {
+            width: 30px;
+            border-radius: 50%;
+            margin-left: 20px;
+        }
+    }
+    .input-side-form  {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        height: 50px;
+        width: 100%;
+        margin-bottom: 20px;
+        background-color: var(--nav-bg-color);
+        > input {
+            outline: none;
+            border-radius: 50px;
+            height: 40px;
+            width: 80%;
+            text-indent: 15px;
+            color: white;
+            border: 1px solid var(--border-color);
+            background-color: var(--nav-bg-color);
+            &::placeholder {
+                color: white;
+            }
+            &:focus::placeholder {
+                color: transparent;
+            }
+        }
+    }
+    .trending-section {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 60px;
+        .more-btn {
+            height: 40px;
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            background-color: var(--green-color);
+        }
+    }
+}
+@media screen and (max-width: 990px) {
+    .right-side-nav-bar {
+        display: none;  
+    }
+}

@@ -1,0 +1,16 @@
+.error-box-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: 30vh;
+    width: 90%;
+    //background-color: red;
+    .msg-code {
+        font-size: 6rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+}

@@ -1,0 +1,75 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    --nav-bg-color: #1E1E1E;
+    --text-color: #FFFFFF;
+    --sub-text-color: rgb(139, 139, 139);
+    --border-color: #807C7C;
+    --main-font: 'Montserrat', sans-serif;
+    --green-color: #039750;
+}
+.App {
+    display: flex;
+    font-family: var(--main-font);
+    #middle-section {
+        height: 100vh;
+        width: 63%;
+        .mobile-nav-menu {
+            position: absolute;
+            overflow: hidden;
+            height: 0px;
+            opacity: 0;
+            top: 70px;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.2s ease;
+            &.active {
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 1;
+                overflow: visible; 
+                height: 70%;
+                width: 94%;
+                background-color: rgb(29, 29, 29);
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    height: 100%;
+                    width: 80%;
+                    a {
+                        text-align: center;
+                        font-size: 1.8rem;
+                        text-decoration: none;
+                        color: var(--green-color);
+                    }
+                    button {
+                        cursor: pointer;
+                        height: 30px;
+                        width: 150px;
+                        border: none;
+                        outline: none;
+                        font-size: 1rem;
+                        color: white;
+                        background-color: var(--green-color);
+                    }
+                }
+            }     
+        }
+    }
+}
+@media screen and (max-width: 990px){
+    .App {
+        #middle-section {
+            width: 100%;
+        } 
+    }
+}
