@@ -4,9 +4,9 @@ import { initializeApp } from "firebase/app";
 import {getAuth, GoogleAuthProvider} from "firebase/auth"
 import {getFirestore} from "firebase/firestore"
 
-import dotenv from 'dotenv';
-// Load the environment variables
-dotenv.config();
+// import dotenv from 'dotenv';
+// // Load the environment variables
+// dotenv.config();
 
 
 // TODO: Add SDKs for Firebase products that you want to use
