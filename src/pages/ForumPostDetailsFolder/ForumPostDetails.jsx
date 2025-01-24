@@ -99,12 +99,7 @@ const ForumPostDetails = () => {
 
     return (
         <section className='comment-details-wrap'>
-            {/* <button onClick={() => console.log(replyArr)}>& ADD</button> */}
-
-            <button onClick={() => console.log(form)}>ADD ME</button> 
-
             <h1>{user.title}</h1>
-
             {userF && 
                 <div className='post'>
                     <div className='post-top'>
@@ -114,14 +109,9 @@ const ForumPostDetails = () => {
                         </div>
                         <div className='top-right'>date</div>
                     </div>
-
-
-
                     <div className='post-middle'>
                         <p>{user.text}</p> 
                     </div>
-
-
                     <div className='post-bottom'>
                         <div>
                             <span>Likes</span>
@@ -133,18 +123,9 @@ const ForumPostDetails = () => {
                         >
                             Reply
                         </span>
-                        {/* <MdOutlineInsertComment/> */}
-                    </div>
-
-
-                    
+                    </div>    
                 </div>
             }
-
-
-            {/* <section className="forum-detail-post-wrap">
-                
-            </section> */}
 
             {replyArr && 
                 replyArr.map(rep => {
@@ -193,7 +174,7 @@ const ForumPostDetails = () => {
                     <div className='form-top-info'>
                         <div className='top-left'>
                             <img src={userF.photoURL} alt='photo of your profile pic'/>
-                            Replying to ---> 
+                            Replying to
                             <span>{repliedPostId.username}</span>
                         </div>
                         <div className='top-right' onClick={() => setActiveForm(false)}>X</div>
