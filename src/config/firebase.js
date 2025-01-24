@@ -1,19 +1,12 @@
-// Import the functions you need from the SDKs you need
+//FIrebase...
 import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth"
+import { getFirestore } from "firebase/firestore"
 
-import {getAuth, GoogleAuthProvider} from "firebase/auth"
-import {getFirestore} from "firebase/firestore"
+//Env file loader...
+import dotenv from 'dotenv';
+dotenv.config();
 
-// import dotenv from 'dotenv';
-// // Load the environment variables
-// dotenv.config();
-
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,

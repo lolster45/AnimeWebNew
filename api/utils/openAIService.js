@@ -1,11 +1,8 @@
 const OpenAI = require('openai')
 
 const client = new OpenAI({
-    //baseURL: "https://api-inference.huggingface.co/v1/",
-    //apiKey: process.env.OPENAI_API_KEY,  // Use environment variables for your API key
-    baseURL: import.meta.env.VITE_HUGGINGFACE_BASE_URL,
-    apiKey: import.meta.env.VITE_HUGGINGFACE_API_KEY, 
-
+    baseURL: process.env.HUGGINGFACE_BASE_URL,
+    apiKey: process.env.HUGGINGFACE_API_KEY, 
 });
 
 // Function to get AI completion (response)
