@@ -1,4 +1,8 @@
 import admin from 'firebase-admin';
+import dotenv from 'dotenv'; // Import dotenv for loading environment variables
+dotenv.config();
+
+
 //import serviceAccount from '../src/config/animenew-82be3-firebase-adminsdk-n1b4n-a274c53847.json';
 
 if (!admin.apps.length) {
