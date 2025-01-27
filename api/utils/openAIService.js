@@ -1,31 +1,34 @@
-import dotenv from 'dotenv'; // Import dotenv for loading environment variables
+import dotenv from 'dotenv';
+import fetch from 'node-fetch'; // Use node-fetch for HTTP requests
+
 dotenv.config();
 
-const OpenAI = require('openai')
+const HUGGINGFACE_API_KEY = process.env.HUGGINGFACE_API_KEY;
+const HUGGINGFACE_BASE_URL = process.env.HUGGINGFACE_BASE_URL;
 
-const client = new OpenAI({
-    baseURL: process.env.HUGGINGFACE_BASE_URL,
-    apiKey: process.env.HUGGINGFACE_API_KEY, 
-});
-
-// Function to get AI completion (response)
 const getAiResponse = async (prompt) => {
-    try {
-      const completion = await client.chat.completions.create({
-        model: "microsoft/DialoGPT-large", // or use "gpt-3.5" based on your need
-        messages: [
-          { role: "user", content: prompt },
-        ],
-        max_tokens: 500
-      });
-  
-      return completion.choices[0].message.content; // Return the AI's message
-    } 
-    catch (error) {
-      console.error("Error communicating with OpenAI API:", error);
-      throw error; // Propagate the error if something goes wrong
+  try {
+    const response = await fetch(HUGGINGFACE_BASE_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${HUGGINGFACE_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        inputs: prompt,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Hugging Face API error: ${response.statusText}`);
     }
+
+    const data = await response.json();
+    return data[0].generated_text; // Return the generated text
+  } catch (error) {
+    console.error("Error communicating with Hugging Face API:", error);
+    throw error;
+  }
 };
 
-module.exports = getAiResponse
-
+export default getAiResponse;
