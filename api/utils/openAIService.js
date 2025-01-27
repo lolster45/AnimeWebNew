@@ -25,7 +25,8 @@ const getAiResponse = async (prompt) => {
 
     const data = await response.json();
     return data[0].generated_text; // Return the generated text
-  } catch (error) {
+  } 
+  catch (error) {
     console.error("Error communicating with Hugging Face API:", error);
     throw error;
   }

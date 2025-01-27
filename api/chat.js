@@ -1,8 +1,8 @@
 const cors = require('cors'); // Import CORS
-const express = require('express'); // Import Express-like middleware
+// const express = require('express'); // Import Express-like middleware
 const { json } = require('micro'); // Parse JSON (used for serverless)
 
-const getAiResponse = require('./utils/openAIService'); // Adjust path as needed
+import getAiResponse from './utils/openAIService';
 
 // Vercel's serverless function handler
 const handler = async (req, res) => {
