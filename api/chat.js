@@ -1,17 +1,16 @@
-const cors = require('cors'); // Import CORS
-// const express = require('express'); // Import Express-like middleware
-const { json } = require('micro'); // Parse JSON (used for serverless)
+import express from 'express';
+import cors from 'cors';
+import getAiResponse from './utils/openAIService.js';
 
-import getAiResponse from './utils/openAIService';
+const app = express();
 
-// Vercel's serverless function handler
-const handler = async (req, res) => {
-  // CORS configuration
-  const corsMiddleware = cors({ origin: '*' });
-  await new Promise((resolve, reject) => corsMiddleware(req, res, (err) => (err ? reject(err) : resolve())));
+// Middleware
+app.use(cors({ origin: '*' }));
+app.use(express.json());
 
-  // Parse the request body
-  const { prompt } = await json(req);
+// Handler
+app.post('/api/chat', async (req, res) => {
+  const { prompt } = req.body;
 
   if (!prompt) {
     return res.status(400).json({ error: 'Prompt is required' });
@@ -20,11 +19,11 @@ const handler = async (req, res) => {
   try {
     const aiResponse = await getAiResponse(prompt); // Call your service function
     return res.status(200).json({ response: aiResponse });
-  } 
-  catch (error) {
+  } catch (error) {
     console.error('Error communicating with OpenAI:', error);
     return res.status(500).json({ error: 'Server error' });
   }
-};
+});
 
-module.exports = handler;
+// Export the app for Vercel
+export default app;
