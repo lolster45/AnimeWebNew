@@ -21,7 +21,7 @@ const getAiResponse = async (prompt) => {
     // });
 
     const response = await client.chatCompletion({
-      model: "deepseek-ai/DeepSeek-R1",
+      model: "gpt-2",
       messages: [
         {
           role: "user",
