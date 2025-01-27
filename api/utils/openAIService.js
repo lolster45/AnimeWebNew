@@ -21,7 +21,7 @@ const getAiResponse = async (prompt) => {
     // });
 
     const response = await client.chatCompletion({
-      model: "gpt-2",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           role: "user",
