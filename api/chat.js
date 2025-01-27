@@ -19,7 +19,8 @@ app.post('/api/chat', async (req, res) => {
   try {
     const aiResponse = await getAiResponse(prompt); // Call your service function
     return res.status(200).json({ response: aiResponse });
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error communicating with OpenAI:', error);
     return res.status(500).json({ error: 'Server error' });
   }
