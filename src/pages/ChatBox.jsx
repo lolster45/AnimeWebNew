@@ -1,5 +1,14 @@
+//React...
 import React, { useState, useRef, useEffect } from 'react';
+
+//Fetch axios...
 import axios from 'axios';
+
+//React icons...
+import { FaArrowUp } from "react-icons/fa";
+
+
+//Styles...
 import '../styles/ChatBox.scss';
 
 const ChatBox = () => {
@@ -21,7 +30,8 @@ const ChatBox = () => {
                 { owner: 'gpt-model', message: res.data.response }
             ]);
             setPrompt('');
-        } catch (error) {
+        } 
+        catch (error) {
             console.error('Error from backend:', error);
         }
 
@@ -59,16 +69,24 @@ const ChatBox = () => {
                 </div>
             </div>
             <form onSubmit={handleSubmit}>
-                <input
+                <textarea
                     type="text"
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
-                    placeholder="Ask something..."
+                    placeholder="Message BoB"
                     required
+                    rows="1"
+                    onInput={(e) => {
+                      e.target.style.height = "auto"; // Reset height
+                      e.target.style.height = `${e.target.scrollHeight}px`; // Adjust height based on content
+                    }}
                 />
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Generating...' : 'Submit'}
-                </button>
+                <div className="submit-wrap">
+                  <button type="submit" disabled={loading} className={`${loading ? 'disabled' : ""}`}>
+
+                      <FaArrowUp/>
+                  </button>
+                </div>
             </form>
         </div>
     );
